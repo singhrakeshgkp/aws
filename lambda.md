@@ -1,4 +1,6 @@
 ## Serverless Lambda
+- Reference https://cloud.spring.io/spring-cloud-function/reference/html/spring-cloud-function.html
+
 <p> it means, we do not need to manage the server. its cloud provider who is gonna manage it. You only need to write the code and run it on cloud. </p>
 
 ### Advantage
@@ -10,5 +12,20 @@
 - if you want to expose an endpoint, or any task without any sort of dependency on server or OS
 
 ## Builing Spring Boot Application And Deploy it on AWS 
-### Create new Spring boot application
-- 
+### Create new Spring boot application(springboot-awslambda-app1)
+- Create a new spring boot application with Spring Cloud Function dependency
+- The spring cloud function dependency exposes the function as an HTTP endpoint. After we run the application, we can curl our target to test it locally.
+- So now run the application and test it using postman or curl command.
+
+### Deploy the above application on aws lambda
+- add the following dependencies
+  - ```spring-cloud-function-adapter-aws```
+  - ```aws-lambda-java-events```
+  - ```aws-lambda-java-core```
+  - ```spring-boot-thin-layout``` Plugin for lightweight jar.
+- Create a class extending ```SpringBootRequestHandler``` class as shown below. Actually this helps spring to serialize and deserialiaze the object.
+ ```
+ public class MyStringHandlers extends SpringBootRequestHandler<String, String> { //String, String denotes that endpoint will take string as input and produce String as output
+
+}
+ ```
