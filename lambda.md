@@ -23,9 +23,17 @@
   - ```aws-lambda-java-events```
   - ```aws-lambda-java-core```
   - ```spring-boot-thin-layout``` Plugin for lightweight jar.
-- Create a class extending ```SpringBootRequestHandler``` class as shown below. Actually this helps spring to serialize and deserialiaze the object.
+- Create a class ```TestHandler``` extending ```SpringBootRequestHandler``` class as shown below. Actually this helps spring to serialize and deserialiaze the object.
  ```
  public class MyStringHandlers extends SpringBootRequestHandler<String, String> { //String, String denotes that endpoint will take string as input and produce String as output
 
 }
  ```
+- Go to your aws console
+- Create a lambda function(create lambda fun->author form scratch+function name+java8/11/ runtime)
+  - Go to basic setting ->edit->Provide Request Handler class ```com.xyz.TestHandler```
+  - In Environment variable give the function name as key value ex.  key ```Function_Name``` and Value ```toUpper```
+- Lambda function is created, <your lambda function>-->action->upload zip jar
+- Now test it Steps are give below
+   - select a test event-> configure test event->give event name+pass the req param if needed else leave it as blank now cleck on create
+   - click on test button on top right.
